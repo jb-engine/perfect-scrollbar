@@ -195,7 +195,7 @@ export default class PerfectScrollbar {
   }
 
   onScroll(e) {
-    if (!this.isAlive) {
+    if (!this.isAlive || !this.element) {
       return;
     }
 
