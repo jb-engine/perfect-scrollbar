@@ -329,8 +329,9 @@
     var roundedScrollTop = Math.floor(element.scrollTop);
     var rect = element.getBoundingClientRect();
 
-    i.containerWidth = Math.ceil(rect.width);
-    i.containerHeight = Math.ceil(rect.height);
+    i.containerWidth = Math.round(rect.width);
+    i.containerHeight = Math.round(rect.height);
+
     i.contentWidth = element.scrollWidth;
     i.contentHeight = element.scrollHeight;
 
@@ -1088,6 +1089,11 @@
             return;
           }
 
+          if (!i.element) {
+            clearInterval(easingLoop);
+            return;
+          }
+
           applyTouchMove(speed.x * 30, speed.y * 30);
 
           speed.x *= 0.8;
@@ -1298,7 +1304,7 @@
   };
 
   PerfectScrollbar.prototype.onScroll = function onScroll (e) {
-    if (!this.isAlive) {
+    if (!this.isAlive || !this.element) {
       return;
     }
 
